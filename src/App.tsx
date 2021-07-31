@@ -5,7 +5,9 @@ import DateRangePickers from "./DateRangePicker";
 import { DateRange } from "./DateRangePicker/Utilities/types";
 
 function App() {
-  const handleChange = (dateRange: DateRange) => {};
+  const handleChange = (dateRange: DateRange) => {
+    console.log("change Date", dateRange);
+  };
   return (
     <div className="App">
       <DateRangePickers open onChange={handleChange} />
