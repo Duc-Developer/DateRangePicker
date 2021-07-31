@@ -88,7 +88,7 @@ var enLocale = require('./locale/en')
  * )
  * //=> '2-a de julio 2014'
  */
-function format(dirtyDate, dirtyFormatStr, dirtyOptions) {
+function format(dirtyDate, dirtyFormatStr, dirtyOptions = null) {
     var formatStr = dirtyFormatStr ? String(dirtyFormatStr) : 'YYYY-MM-DDTHH:mm:ss.SSSZ'
     var options = dirtyOptions || {}
 

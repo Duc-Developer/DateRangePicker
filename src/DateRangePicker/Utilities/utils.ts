@@ -13,7 +13,7 @@ import {
   isValid,
   min,
   max,
-} from "date-fns";
+} from "../Helpers";
 
 // eslint-disable-next-line no-unused-vars
 import { DateRange } from "./types";
@@ -67,7 +67,7 @@ export const parseOptionalDate = (
   defaultValue: Date
 ) => {
   if (date) {
-    const parsed = parse(date);
+    const parsed = parse(date, null);
     if (isValid(parsed)) return parsed;
   }
   return defaultValue;
