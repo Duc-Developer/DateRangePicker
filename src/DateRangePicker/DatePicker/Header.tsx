@@ -6,6 +6,7 @@ import {
   IconButton,
   Select,
   MenuItem,
+  Typography,
 } from "@material-ui/core";
 import React from "react";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
@@ -85,33 +86,9 @@ const Header: React.FunctionComponent<HeaderProps> = ({
         </IconButton>
       </Grid>
       <Grid item>
-        <Select
-          value={getMonth(date)}
-          onChange={handleMonthChange}
-          MenuProps={{ disablePortal: true }}
-        >
-          {MONTHS.map((month, idx) => (
-            <MenuItem key={month} value={idx}>
-              {month}
-            </MenuItem>
-          ))}
-        </Select>
-      </Grid>
-
-      <Grid item>
-        <Select
-          value={getYear(date)}
-          onChange={handleYearChange}
-          MenuProps={{ disablePortal: true }}
-        >
-          {generateYears(date, 30).map((year) => (
-            <MenuItem key={year} value={year}>
-              {year}
-            </MenuItem>
-          ))}
-        </Select>
-
-        {/* <Typography>{format(date, "MMMM YYYY")}</Typography> */}
+        <Typography style={{ fontWeight: "bold" }}>
+          {MONTHS[getMonth(date)]}
+        </Typography>
       </Grid>
       <Grid item className={classes.iconContainer}>
         <IconButton

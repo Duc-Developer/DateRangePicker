@@ -2,14 +2,12 @@ import React from "react";
 import {
   Paper,
   Grid,
-  Typography,
   Divider,
   makeStyles,
   // eslint-disable-next-line no-unused-vars
   Theme,
 } from "@material-ui/core";
-import { format, differenceInCalendarMonths } from "../Helpers";
-import ArrowRightAlt from "@material-ui/icons/ArrowRightAlt";
+import { differenceInCalendarMonths } from "../Helpers";
 import Month from "./Month";
 import DefinedRanges from "./DefinedRanges";
 import {
@@ -75,7 +73,6 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
     handlers,
   } = props;
 
-  const { startDate, endDate } = dateRange;
   const canNavigateCloser =
     differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
   const commonProps = {
@@ -89,21 +86,6 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
     <Paper elevation={5} square>
       <Grid container direction="row" wrap="nowrap">
         <Grid>
-          <Grid container className={classes.header} alignItems="center">
-            <Grid item className={classes.headerItem}>
-              <Typography variant="subtitle1">
-                {startDate ? format(startDate, "MMMM DD, YYYY") : "Start Date"}
-              </Typography>
-            </Grid>
-            <Grid item className={classes.headerItem}>
-              <ArrowRightAlt color="action" />
-            </Grid>
-            <Grid item className={classes.headerItem}>
-              <Typography variant="subtitle1">
-                {endDate ? format(endDate, "MMMM DD, YYYY") : "End Date"}
-              </Typography>
-            </Grid>
-          </Grid>
           <Divider />
           <Grid container direction="row" justify="center" wrap="nowrap">
             <Month
@@ -122,14 +104,6 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
               marker={MARKERS.SECOND_MONTH}
             />
           </Grid>
-        </Grid>
-        <div className={classes.divider} />
-        <Grid>
-          <DefinedRanges
-            selectedRange={dateRange}
-            ranges={ranges}
-            setRange={setDateRange}
-          />
         </Grid>
       </Grid>
     </Paper>

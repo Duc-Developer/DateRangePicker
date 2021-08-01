@@ -57,7 +57,12 @@ function DateRangePickers(props: Props) {
           ),
         }}
       />
-      <Popper open={isOpenDatePicker} anchorEl={anchorEl?.current} transition>
+      <Popper
+        open={isOpenDatePicker}
+        placement="bottom"
+        anchorEl={anchorEl?.current}
+        transition
+      >
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
             <DatePicker open {...props} onChange={handleChange} />

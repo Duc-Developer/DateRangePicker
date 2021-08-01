@@ -25,6 +25,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: 36,
     padding: 0,
   },
+  filledBtnWithStart: {
+    borderRadius: "10px 0 0 10px",
+  },
+  filledBtnWithEnd: {
+    borderRadius: "0 10px 10px 0",
+  },
   buttonText: {
     lineHeight: 1.6,
   },
@@ -46,7 +52,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface DayProps {
-  filled?: boolean;
+  isStart?: boolean;
+  isEnd?: boolean;
   outlined?: boolean;
   highlighted?: boolean;
   disabled?: boolean;
@@ -63,13 +70,15 @@ const Day: React.FunctionComponent<DayProps> = ({
   disabled,
   highlighted,
   outlined,
-  filled,
+  isStart,
+  isEnd,
   onClick,
   onHover,
   value,
 }: DayProps) => {
   const classes = useStyles();
 
+  const filled = isStart || isEnd;
   return (
     <div
       className={combine(
@@ -83,7 +92,12 @@ const Day: React.FunctionComponent<DayProps> = ({
         className={combine(
           classes.button,
           !disabled && outlined && classes.outlined,
-          !disabled && filled && classes.filled
+          !disabled && filled && classes.filled,
+          !disabled && isStart
+            ? classes.filledBtnWithStart
+            : !disabled && isEnd
+            ? classes.filledBtnWithEnd
+            : ""
         )}
         disabled={disabled}
         onClick={onClick}
