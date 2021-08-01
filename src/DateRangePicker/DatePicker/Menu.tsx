@@ -54,6 +54,7 @@ interface MenuProps {
     onDayHover: (day: Date) => void;
     onMonthNavigate: (marker: symbol, action: NavigationAction) => void;
   };
+  GroupActions: React.FC;
 }
 
 const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
@@ -71,6 +72,7 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
     setDateRange,
     helpers,
     handlers,
+    GroupActions,
   } = props;
 
   const canNavigateCloser =
@@ -106,6 +108,7 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
           </Grid>
         </Grid>
       </Grid>
+      {<GroupActions />}
     </Paper>
   );
 };

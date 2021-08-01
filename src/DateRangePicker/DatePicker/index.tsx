@@ -13,6 +13,7 @@ import {
   max,
   min,
 } from "../Helpers";
+import { Grid, makeStyles, Button } from "@material-ui/core";
 
 // eslint-disable-next-line no-unused-vars
 import { DateRange, NavigationAction, DefinedRange } from "../Utilities/types";
@@ -35,8 +36,16 @@ export interface DateRangePickerProps {
   definedRanges?: DefinedRange[];
   minDate?: Date | string;
   maxDate?: Date | string;
+  handleError?: (dateRange: DateRange) => void;
   onChange: (dateRange: DateRange) => void;
 }
+
+const useStyles = makeStyles((theme) => ({
+  btnActions: {
+    paddingBottom: 20,
+    paddingRight: 20,
+  },
+}));
 
 const DatePicker: React.FunctionComponent<DateRangePickerProps> = (
   props: DateRangePickerProps
@@ -46,6 +55,7 @@ const DatePicker: React.FunctionComponent<DateRangePickerProps> = (
   const {
     open,
     onChange,
+    handleError,
     initialDateRange,
     minDate,
     maxDate,
@@ -94,7 +104,7 @@ const DatePicker: React.FunctionComponent<DateRangePickerProps> = (
       range.endDate = newEnd = min(newEnd, maxDateValid);
 
       setDateRange(range);
-      onChange(range);
+      // onChange(range);
 
       setFirstMonth(newStart);
       setSecondMonth(
@@ -104,7 +114,7 @@ const DatePicker: React.FunctionComponent<DateRangePickerProps> = (
       const emptyRange = {};
 
       setDateRange(emptyRange);
-      onChange(emptyRange);
+      // onChange(emptyRange);
 
       setFirstMonth(today);
       setSecondMonth(addMonths(firstMonth, 1));
@@ -114,7 +124,7 @@ const DatePicker: React.FunctionComponent<DateRangePickerProps> = (
   const onDayClick = (day: Date) => {
     if (startDate && !endDate && !isBefore(day, startDate)) {
       const newRange = { startDate, endDate: day };
-      onChange(newRange);
+      // onChange(newRange);
       setDateRange(newRange);
     } else {
       setDateRange({ startDate: day, endDate: undefined });
@@ -158,6 +168,22 @@ const DatePicker: React.FunctionComponent<DateRangePickerProps> = (
     onMonthNavigate,
   };
 
+  const handleCancel = (): void => {
+    onChange({
+      ...initialDateRange,
+    });
+  };
+
+  const handleSetDateSubmit = (): void => {
+    const { startDate, endDate } = dateRange;
+    if (!handleError) return onChange(dateRange);
+    if (!startDate || !endDate) {
+      handleError(dateRange);
+    } else {
+      onChange(dateRange);
+    }
+  };
+  const classes = useStyles();
   return open ? (
     <Menu
       dateRange={dateRange}
@@ -171,6 +197,29 @@ const DatePicker: React.FunctionComponent<DateRangePickerProps> = (
       setDateRange={setDateRangeValidated}
       helpers={helpers}
       handlers={handlers}
+      GroupActions={() => (
+        <Grid
+          className={classes.btnActions}
+          container
+          justify="flex-end"
+          direction="row"
+          wrap="nowrap"
+        >
+          <div>
+            <Button onClick={handleCancel} size="small" variant="text">
+              Cancel
+            </Button>
+            <Button
+              onClick={handleSetDateSubmit}
+              size="small"
+              variant="contained"
+              color="primary"
+            >
+              Set date
+            </Button>
+          </div>
+        </Grid>
+      )}
     />
   ) : null;
 };

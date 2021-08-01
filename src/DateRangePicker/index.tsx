@@ -20,19 +20,29 @@ function DateRangePickers(props: Props) {
   const [textFieldValue, setTextFieldValue] = useState<string>(
     initialTextFieldValue
   );
+  const [errors, setErrors] = useState("");
   const anchorEl = useRef(null);
 
   const handleChange = (dateRange: DateRange) => {
     const { startDate, endDate } = dateRange;
-    setTextFieldValue(
-      `${dateStringToPattern(startDate)} - ${dateStringToPattern(endDate)}`
-    );
+    let newTextFieldValue = initialTextFieldValue;
+    if (startDate && endDate) {
+      newTextFieldValue = `${dateStringToPattern(
+        startDate
+      )} - ${dateStringToPattern(endDate)}`;
+      setErrors("");
+    }
+    setTextFieldValue(newTextFieldValue);
     setIsOpenDatePicker(!isOpenDatePicker);
     onChange(dateRange);
   };
 
   const handleOpenDatePicker = () => {
     setIsOpenDatePicker(!isOpenDatePicker);
+  };
+
+  const handleError = () => {
+    setErrors("Date range is invalid!");
   };
 
   return (
@@ -46,6 +56,8 @@ function DateRangePickers(props: Props) {
         ref={anchorEl}
         InputLabelProps={{ shrink: true }}
         value={textFieldValue}
+        error={!!errors}
+        helperText={errors}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -65,7 +77,12 @@ function DateRangePickers(props: Props) {
       >
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
-            <DatePicker open {...props} onChange={handleChange} />
+            <DatePicker
+              open
+              {...props}
+              onChange={handleChange}
+              handleError={handleError}
+            />
           </Fade>
         )}
       </Popper>
