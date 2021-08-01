@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import DatePicker, { DateRangePickerProps } from "./DatePicker";
 import { DateRange } from ".//Utilities/types";
 import { useState } from "react";
@@ -15,13 +15,27 @@ type Props = Omit<DateRangePickerProps, "open">;
 
 const initialTextFieldValue = "Start Date - End Date";
 function DateRangePickers(props: Props) {
-  const { onChange } = props;
+  const { onChange, initialDateRange } = props;
   const [isOpenDatePicker, setIsOpenDatePicker] = useState(false);
   const [textFieldValue, setTextFieldValue] = useState<string>(
     initialTextFieldValue
   );
   const [errors, setErrors] = useState("");
   const anchorEl = useRef(null);
+
+  useEffect(() => {
+    if (
+      initialDateRange &&
+      initialDateRange.startDate &&
+      initialDateRange.endDate
+    ) {
+      setTextFieldValue(
+        `${dateStringToPattern(
+          initialDateRange.startDate
+        )} - ${dateStringToPattern(initialDateRange.endDate)}`
+      );
+    }
+  }, [initialDateRange]);
 
   const handleChange = (dateRange: DateRange) => {
     const { startDate, endDate } = dateRange;
