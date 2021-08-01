@@ -1,9 +1,9 @@
 import React from "react";
 import { List, ListItem, ListItemText } from "@material-ui/core";
-import { isSameDay } from "./Helpers";
+import { isSameDay } from "../Helpers";
 
 // eslint-disable-next-line no-unused-vars
-import { DefinedRange, DateRange } from "./Utilities/types";
+import { DefinedRange, DateRange } from "../Utilities/types";
 
 type DefinedRangesProps = {
   setRange: (range: DateRange) => void;

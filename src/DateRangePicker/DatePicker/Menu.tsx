@@ -8,7 +8,7 @@ import {
   // eslint-disable-next-line no-unused-vars
   Theme,
 } from "@material-ui/core";
-import { format, differenceInCalendarMonths } from "./Helpers";
+import { format, differenceInCalendarMonths } from "../Helpers";
 import ArrowRightAlt from "@material-ui/icons/ArrowRightAlt";
 import Month from "./Month";
 import DefinedRanges from "./DefinedRanges";
@@ -21,7 +21,7 @@ import {
   Setter,
   // eslint-disable-next-line no-unused-vars
   NavigationAction,
-} from "./Utilities/types";
+} from "../Utilities/types";
 import { MARKERS } from ".";
 
 const useStyles = makeStyles((theme: Theme) => ({

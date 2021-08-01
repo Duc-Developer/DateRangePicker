@@ -5,7 +5,7 @@ import { StylesProvider } from "@material-ui/core/styles";
 import DateRangePickerWrapper, {
   DateRangePickerWrapperProps,
 } from "./DateRangePickerWrapper";
-import generateClassName from "./Utilities/generateClassName";
+import generateClassName from "../Utilities/generateClassName";
 
 const DateRangePickerExporter: React.FunctionComponent<DateRangePickerWrapperProps> =
   (props: DateRangePickerWrapperProps) => (

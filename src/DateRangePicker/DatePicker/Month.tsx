@@ -6,7 +6,7 @@ import {
   isToday,
   format,
   isWithinRange,
-} from "./Helpers";
+} from "../Helpers";
 import {
   chunks,
   getDaysInMonth,
@@ -14,12 +14,12 @@ import {
   isEndOfRange,
   inDateRange,
   isRangeSameDay,
-} from "./Utilities/utils";
+} from "../Utilities/utils";
 import Header from "./Header";
 import Day from "./Day";
 
 // eslint-disable-next-line no-unused-vars
-import { NavigationAction, DateRange } from "./Utilities/types";
+import { NavigationAction, DateRange } from "../Utilities/types";
 
 const WEEK_DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 

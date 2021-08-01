@@ -8,7 +8,7 @@ import {
   // eslint-disable-next-line no-unused-vars
   Theme,
 } from "@material-ui/core";
-import { combine } from "./Utilities/utils";
+import { combine } from "../Utilities/utils";
 
 const useStyles = makeStyles((theme: Theme) => ({
   leftBorderRadius: {
